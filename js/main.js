@@ -1,0 +1,1 @@
+var menubar = require("menubar");

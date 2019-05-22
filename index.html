@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <title>taski.</title>
+    <link href="style/style.css" rel="stylesheet">
+    <script src="js/vue.min.js"></script>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+</head>
+
+<body>
+    <div id="app" v-bind:class="{dark: darkSkin}">
+
+
+        <header class="container">
+            <div id="date"></div>
+            <h1>taski.</h1>
+            <div id="switch" v-on:click="toggle"></div>
+        </header>
+
+        <div class="container">
+            <input @keydown.enter="addTodo" class="inputtask" placeholder="New task" v-model="newTodo">
+            <ul class="todos list-unstyled">
+                <li :class="{todo, completed: todo.completed, removed: todo.removed }" v-for="todo in todos">
+                    <div class="task">
+                        <input class="styled-checkbox done" type="checkbox" v-model="todo.completed">
+                        {{ todo.text }}
+                    </div>
+
+                    <div class="delete">
+                        <input type="checkbox" v-model="todo.removed">
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div @click="wipe()" class="wipe">wipe all</div>
+
+        <footer>coded by Benjamin Raffetseder </footer>
+
+    </div>
+    <script src="js/app.js"></script>
+
+
+    <!-- Dev Settings -->
+    <script>
+        document.addEventListener("keydown", function (e) {
+            if (e.which === 123) {
+                require('remote').getCurrentWindow().toggleDevTools();
+            } else if (e.which === 116) {
+                location.reload();
+            }
+        });
+    </script>
+</body>
+
+</html>
